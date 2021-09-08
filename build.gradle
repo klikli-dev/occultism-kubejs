@@ -8,10 +8,6 @@ buildscript {
     }
 }
 
-plugins {
-    id "com.matthewprenger.cursegradle" version "1.4.0"
-}
-
 apply plugin: 'net.minecraftforge.gradle'
 // Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
 apply plugin: 'idea'
@@ -141,6 +137,7 @@ dependencies {
 
     implementation "dev.latvian.mods:rhino:${rhino_version}"
     implementation fg.deobf("me.shedaniel:architectury-forge:${architectury_version}")
+    implementation fg.deobf("curse.maven:occultism-361026:3453087") //1.16.5-1.10.4
 }
 
 // Example for how to get properties into the manifest for reading by the runtime..
