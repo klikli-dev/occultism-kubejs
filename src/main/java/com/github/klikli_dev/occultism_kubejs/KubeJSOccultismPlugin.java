@@ -22,8 +22,8 @@
 
 package com.github.klikli_dev.occultism_kubejs;
 
-import dev.latvian.kubejs.KubeJSPlugin;
-import dev.latvian.kubejs.item.custom.ItemTypes;
+import dev.latvian.mods.kubejs.KubeJSPlugin;
+import dev.latvian.mods.kubejs.item.type.ItemTypes;
 
 public class KubeJSOccultismPlugin extends KubeJSPlugin {
     @Override

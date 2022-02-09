@@ -23,9 +23,9 @@
 package com.github.klikli_dev.occultism_kubejs;
 
 import com.github.klikli_dev.occultism.common.item.DummyTooltipItem;
-import dev.latvian.kubejs.item.ItemBuilder;
-import dev.latvian.kubejs.item.custom.ItemType;
-import net.minecraft.item.Item;
+import dev.latvian.mods.kubejs.item.ItemBuilder;
+import dev.latvian.mods.kubejs.item.type.ItemType;
+import net.minecraft.world.item.Item;
 
 public class RitualDummyItemType extends ItemType {
     public RitualDummyItemType(String n) {
