@@ -24,16 +24,16 @@ package com.github.klikli_dev.occultism_kubejs;
 
 import com.github.klikli_dev.occultism.common.item.DummyTooltipItem;
 import dev.latvian.mods.kubejs.item.ItemBuilder;
-import dev.latvian.mods.kubejs.item.type.ItemType;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 
-public class RitualDummyItemType extends ItemType {
-    public RitualDummyItemType(String n) {
-        super(n);
+public class RitualDummyItemType extends ItemBuilder {
+    public RitualDummyItemType(ResourceLocation rl) {
+        super(rl);
     }
 
     @Override
-    public Item createItem(ItemBuilder builder) {
-        return new DummyTooltipItem(builder.createItemProperties());
+    public Item createObject() {
+        return new DummyTooltipItem(this.createItemProperties());
     }
 }

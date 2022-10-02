@@ -23,12 +23,12 @@
 package com.github.klikli_dev.occultism_kubejs;
 
 import dev.latvian.mods.kubejs.KubeJSPlugin;
-import dev.latvian.mods.kubejs.item.type.ItemTypes;
+import dev.latvian.mods.kubejs.RegistryObjectBuilderTypes;
 
 public class KubeJSOccultismPlugin extends KubeJSPlugin {
     @Override
     public void init() {
-        ItemTypes.register(new RitualDummyItemType("occultism:ritual_dummy"));
+        RegistryObjectBuilderTypes.ITEM.addType("occultism:ritual_dummy", RitualDummyItemType.class, RitualDummyItemType::new);
     }
 
 }
