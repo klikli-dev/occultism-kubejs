@@ -1,6 +1,10 @@
 pluginManagement {
-    repositories {
-        gradlePluginPortal()
-        maven { url = 'https://maven.minecraftforge.net/' }
-    }
+	repositories {
+		maven { url "https://maven.creeperhost.net/" }
+		maven { url "https://maven.architectury.dev/" }
+		mavenCentral()
+		gradlePluginPortal()
+	}
 }
+
+rootProject.name = 'KubeJS-Occultism-1.19.2'

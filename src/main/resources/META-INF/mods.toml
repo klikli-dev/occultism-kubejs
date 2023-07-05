@@ -17,9 +17,7 @@ issueTrackerURL="https://github.com/klikli-dev/occultism-kubejs/issues" #optiona
 # The modid of the mod
 modId="occultism_kubejs" #mandatory
 # The version number of the mod - there's a few well known ${} variables useable here or just hardcode it
-# ${file.jarVersion} will substitute the value of the Implementation-Version as read from the mod's JAR file metadata
-# see the associated build.gradle script for how to populate this completely automatically during a build
-version="${file.jarVersion}" #mandatory
+version="${version}" #mandatory
  # A display name for the mod
 displayName="Occultism KubeJS" #mandatory
 # A URL to query for updates for this mod. See the JSON update specification <here>
@@ -39,13 +37,13 @@ description='''KubeJS Plugin for Occultism'''
 [[dependencies.occultism_kubejs]]
     modId="occultism"
     mandatory=true
-    versionRange="[1.19.2-1.45.4,)"
+    versionRange="[1.19.2-1.80.12,)"
     ordering = "AFTER"
     side="BOTH"
 
-[[dependencies.v]]
+[[dependencies.occultism_kubejs]]
     modId = "kubejs"
     mandatory = true
-    versionRange = "[1902.6.0-build.74,)"
+    versionRange = "[1902.6.1-build.241,)"
     ordering = "AFTER"
     side = "BOTH"
