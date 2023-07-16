@@ -22,7 +22,10 @@
 
 package com.github.klikli_dev.occultism_kubejs;
 
+import com.github.klikli_dev.occultism.registry.OccultismRecipes;
 import dev.latvian.mods.kubejs.KubeJSPlugin;
+import dev.latvian.mods.kubejs.recipe.schema.RegisterRecipeSchemasEvent;
+import dev.latvian.mods.kubejs.recipe.schema.minecraft.ShapelessRecipeSchema;
 import dev.latvian.mods.kubejs.registry.RegistryInfo;
 
 public class KubeJSOccultismPlugin extends KubeJSPlugin {
@@ -31,4 +34,12 @@ public class KubeJSOccultismPlugin extends KubeJSPlugin {
 		RegistryInfo.ITEM.addType("occultism:ritual_dummy", RitualDummyItemType.class, RitualDummyItemType::new);
 	}
 
+	@Override
+	public void registerRecipeSchemas(RegisterRecipeSchemasEvent event) {
+		event.register(OccultismRecipes.SPIRIT_TRADE.getId(), ShapelessRecipeSchema.SCHEMA); // yes, it REALLY IS just a shapeless recipe lmao
+		event.register(OccultismRecipes.SPIRIT_FIRE.getId(), OccultismRecipeSchema.BASIC);
+		event.register(OccultismRecipes.CRUSHING.getId(), OccultismRecipeSchema.CRUSHING);
+		event.register(OccultismRecipes.MINER.getId(), OccultismRecipeSchema.BASIC);
+		event.register(OccultismRecipes.RITUAL.getId(), RitualRecipeSchema.SCHEMA);
+	}
 }

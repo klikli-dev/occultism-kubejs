@@ -38,17 +38,25 @@ repositories {
 			includeGroup "curse.maven"
 		}
 	}
+
+	mavenLocal()
 }
 
 dependencies {
 	minecraft "com.mojang:minecraft:${project.mc_version}"
 	mappings loom.officialMojangMappings()
 
-	forge "net.minecraftforge:forge:1.19.2-43.1.32"
+	forge "net.minecraftforge:forge:1.19.2-43.2.14"
 
 	modApi "dev.latvian.mods:kubejs-forge:${project.kubejs_version}"
 
 	modCompileOnly modLocalRuntime("curse.maven:occultism-361026:4607181") // 1.80.12
+	modCompileOnly modLocalRuntime("curse.maven:curios-309927:4523009") // curios (required for occultism)
+	modCompileOnly modLocalRuntime("curse.maven:geckolib-388172:4407241") // geckolib (required for occultism)
+	modCompileOnly modLocalRuntime("curse.maven:smartbrainlib-661293:4458565") // smartbrainlib (required for occultism)
+
+	// from maven local(!)
+	modCompileOnly modLocalRuntime("com.klikli_dev:modonomicon:1.19.2-1.30.0") // modonomicon (required for occultism)
 
 	// just for testing
 	modRuntimeOnly "curse.maven:jei-238222:4615177"
@@ -77,12 +85,12 @@ java {
 jar {
 	manifest {
 		attributes([
-				"Specification-Title": "occultism_kubejs",
-				"Specification-Vendor": "Kli Kli",
-				"Specification-Version": "1", // We are version 1 of ourselves
-				"Implementation-Title": project.name,
-				"Implementation-Version": "${version}",
-				"Implementation-Vendor" :"Kli Kli",
+				"Specification-Title"     : "occultism_kubejs",
+				"Specification-Vendor"    : "Kli Kli",
+				"Specification-Version"   : "1", // We are version 1 of ourselves
+				"Implementation-Title"    : project.name,
+				"Implementation-Version"  : "${version}",
+				"Implementation-Vendor"   : "Kli Kli",
 				"Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
 		])
 	}

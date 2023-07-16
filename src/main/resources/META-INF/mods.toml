@@ -44,6 +44,6 @@ description='''KubeJS Plugin for Occultism'''
 [[dependencies.occultism_kubejs]]
     modId = "kubejs"
     mandatory = true
-    versionRange = "[1902.6.1-build.241,)"
+    versionRange = "[1902.6.1-build.281,)"
     ordering = "AFTER"
     side = "BOTH"
