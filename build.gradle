@@ -50,13 +50,11 @@ dependencies {
 
 	modApi "dev.latvian.mods:kubejs-forge:${project.kubejs_version}"
 
-	modCompileOnly modLocalRuntime("curse.maven:occultism-361026:4607181") // 1.80.12
+	modCompileOnly modLocalRuntime("curse.maven:occultism-361026:4674452") // occultism-1.19.2-1.83.0.jar
 	modCompileOnly modLocalRuntime("curse.maven:curios-309927:4523009") // curios (required for occultism)
 	modCompileOnly modLocalRuntime("curse.maven:geckolib-388172:4407241") // geckolib (required for occultism)
 	modCompileOnly modLocalRuntime("curse.maven:smartbrainlib-661293:4458565") // smartbrainlib (required for occultism)
-
-	// from maven local(!)
-	modCompileOnly modLocalRuntime("com.klikli_dev:modonomicon:1.19.2-1.30.0") // modonomicon (required for occultism)
+	modCompileOnly modLocalRuntime("curse.maven:modonomicon-538392:4675974") // modonomicon-1.19.2-1.34.0.jar (required for occultism)
 
 	// just for testing
 	modRuntimeOnly "curse.maven:jei-238222:4615177"

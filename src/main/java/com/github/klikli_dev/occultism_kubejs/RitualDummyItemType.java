@@ -22,7 +22,7 @@
 
 package com.github.klikli_dev.occultism_kubejs;
 
-import com.github.klikli_dev.occultism.common.item.DummyTooltipItem;
+import com.klikli_dev.occultism.common.item.DummyTooltipItem;
 import dev.latvian.mods.kubejs.item.ItemBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;

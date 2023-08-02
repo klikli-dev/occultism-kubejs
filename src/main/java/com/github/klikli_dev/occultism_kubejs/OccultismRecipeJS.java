@@ -1,8 +1,8 @@
 package com.github.klikli_dev.occultism_kubejs;
 
-import com.github.klikli_dev.occultism.common.misc.OutputIngredient;
-import com.github.klikli_dev.occultism.common.misc.WeightedOutputIngredient;
 import com.google.gson.JsonElement;
+import com.klikli_dev.occultism.common.misc.OutputIngredient;
+import com.klikli_dev.occultism.common.misc.WeightedOutputIngredient;
 import dev.latvian.mods.kubejs.item.OutputItem;
 import dev.latvian.mods.kubejs.recipe.RecipeJS;
 
