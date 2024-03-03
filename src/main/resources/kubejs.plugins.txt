@@ -1,1 +1,1 @@
-com.github.klikli_dev.occultism_kubejs.KubeJSOccultismPlugin
+com.klikli_dev.occultism_kubejs.KubeJSOccultismPlugin

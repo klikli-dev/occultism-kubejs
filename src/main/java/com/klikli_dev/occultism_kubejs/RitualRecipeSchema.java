@@ -1,4 +1,4 @@
-package com.github.klikli_dev.occultism_kubejs;
+package com.klikli_dev.occultism_kubejs;
 
 import dev.latvian.mods.kubejs.item.InputItem;
 import dev.latvian.mods.kubejs.item.OutputItem;
@@ -9,7 +9,9 @@ import dev.latvian.mods.kubejs.recipe.component.RecipeComponentBuilder;
 import dev.latvian.mods.kubejs.recipe.component.StringComponent;
 import dev.latvian.mods.kubejs.recipe.schema.RecipeSchema;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraftforge.registries.ForgeRegistries;
 
 public interface RitualRecipeSchema {
 	RecipeKey<String> GROUP = StringComponent.ANY.key("group").optional("").exclude();
@@ -25,7 +27,7 @@ public interface RitualRecipeSchema {
 	RecipeKey<String> SPIRIT_JOB_TYPE = StringComponent.ID.key("spirit_job_type").alt("spiritJobType").preferred("jobType").defaultOptional();
 	RecipeKey<OutputItem> RITUAL_DUMMY = ItemComponents.OUTPUT.key("ritual_dummy").alt("ritualDummy").preferred("dummyItem").alt("dummy")
 			// apparently there is never any static reference to this item, so let's just hope klikli never changes this lmao
-			.optional(OutputItem.of(Registry.ITEM.get(new ResourceLocation("occultism:ritual_dummy/custom_ritual"))))
+			.optional(OutputItem.of(ForgeRegistries.ITEMS.getValue(new ResourceLocation("occultism:ritual_dummy/custom_ritual"))))
 			.alwaysWrite();
 	RecipeKey<?> ENTITY_TO_SACRIFICE = new RecipeComponentBuilder(2)
 			.add(StringComponent.ID.key("tag"))

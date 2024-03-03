@@ -1,4 +1,4 @@
-package com.github.klikli_dev.occultism_kubejs;
+package com.klikli_dev.occultism_kubejs;
 
 import com.google.gson.JsonObject;
 import dev.latvian.mods.kubejs.item.InputItem;
