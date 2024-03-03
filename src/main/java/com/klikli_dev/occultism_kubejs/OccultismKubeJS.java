@@ -22,9 +22,38 @@
 
 package com.klikli_dev.occultism_kubejs;
 
+import com.klikli_dev.occultism.handlers.TooltipHandler;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fml.loading.FMLEnvironment;
 
 @Mod(OccultismKubeJS.MODID)
 public class OccultismKubeJS {
     public static final String MODID = "occultism_kubejs";
+
+    public static OccultismKubeJS INSTANCE;
+
+    public OccultismKubeJS() {
+        INSTANCE = this;
+
+        IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+
+        if (FMLEnvironment.dist == Dist.CLIENT) {
+            modEventBus.addListener(OccultismKubeJS.Client::onClientSetup);
+        }
+    }
+
+    public static ResourceLocation loc(String path) {
+        return new ResourceLocation(MODID, path);
+    }
+
+    public static class Client {
+        public static void onClientSetup(FMLClientSetupEvent event) {
+            TooltipHandler.registerNamespaceToListenTo("kubejs");
+        }
+    }
 }

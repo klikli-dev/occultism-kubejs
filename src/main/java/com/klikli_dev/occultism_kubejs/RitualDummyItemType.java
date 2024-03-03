@@ -22,18 +22,28 @@
 
 package com.klikli_dev.occultism_kubejs;
 
+import com.google.gson.JsonObject;
 import com.klikli_dev.occultism.common.item.DummyTooltipItem;
 import dev.latvian.mods.kubejs.item.ItemBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 
+
 public class RitualDummyItemType extends ItemBuilder {
     public RitualDummyItemType(ResourceLocation rl) {
         super(rl);
+
+        //make the item just use the ritual dummy parent mode
+        //Note:  we are not using this.parentModel() because it causes textures to be overwritten with a texture location corresponding to the item id unless the correct one is manually specified again
+        var modelJson = new JsonObject();
+        modelJson.addProperty("parent", "occultism:item/ritual_dummy");
+        this.modelJson(modelJson);
     }
 
     @Override
     public Item createObject() {
         return new DummyTooltipItem(this.createItemProperties());
     }
+
+
 }
