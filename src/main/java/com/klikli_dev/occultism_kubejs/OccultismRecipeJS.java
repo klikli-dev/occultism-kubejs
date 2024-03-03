@@ -1,4 +1,4 @@
-package com.github.klikli_dev.occultism_kubejs;
+package com.klikli_dev.occultism_kubejs;
 
 import com.google.gson.JsonElement;
 import com.klikli_dev.occultism.common.misc.OutputIngredient;

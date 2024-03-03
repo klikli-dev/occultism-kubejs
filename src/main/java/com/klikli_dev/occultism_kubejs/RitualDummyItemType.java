@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright 2020 klikli-dev
+ * Copyright 2021 klikli-dev
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
  * associated documentation files (the "Software"), to deal in the Software without restriction, including
@@ -20,13 +20,20 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.github.klikli_dev.occultism_kubejs;
+package com.klikli_dev.occultism_kubejs;
 
-import net.minecraftforge.fml.common.Mod;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import com.klikli_dev.occultism.common.item.DummyTooltipItem;
+import dev.latvian.mods.kubejs.item.ItemBuilder;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
 
-@Mod(OccultismKubeJS.MODID)
-public class OccultismKubeJS {
-    public static final String MODID = "occultism_kubejs";
+public class RitualDummyItemType extends ItemBuilder {
+    public RitualDummyItemType(ResourceLocation rl) {
+        super(rl);
+    }
+
+    @Override
+    public Item createObject() {
+        return new DummyTooltipItem(this.createItemProperties());
+    }
 }

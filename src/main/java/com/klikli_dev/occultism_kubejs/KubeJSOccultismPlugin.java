@@ -20,7 +20,7 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.github.klikli_dev.occultism_kubejs;
+package com.klikli_dev.occultism_kubejs;
 
 import com.klikli_dev.occultism.registry.OccultismRecipes;
 import dev.latvian.mods.kubejs.KubeJSPlugin;
