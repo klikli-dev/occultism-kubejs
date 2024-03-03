@@ -80,9 +80,9 @@ jobs:
         uses: Kir-Antipov/mc-publish@v3.3.0
         if: ${{ steps.get_release_type.outputs.result != 'test' }}
         with:
-          modrinth-id: sbJh4AZw
+          modrinth-id: u5J68aYW
           modrinth-token: ${{ secrets.MODRINTH_API_KEY }}
-          curseforge-id: 361026
+          curseforge-id: 525693
           curseforge-token: ${{ secrets.CURSEFORGE_API_KEY }}
 
           files: |
