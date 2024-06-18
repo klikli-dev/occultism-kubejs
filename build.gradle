@@ -1,8 +1,7 @@
 plugins {
 	id 'idea'
 	id 'maven-publish'
-	id 'net.minecraftforge.gradle' version '[6.0,6.2)'
-	id 'org.parchmentmc.librarian.forgegradle' version '1.+'
+	id 'net.neoforged.gradle.userdev' version "${neogradle_version}"
 }
 
 if (System.getenv('MOD_VERSION') != null) {
@@ -11,91 +10,37 @@ if (System.getenv('MOD_VERSION') != null) {
 version = mod_version
 
 base {
-	archivesName = mod_id + "-" + minecraft_version
+	archivesName = "${mod_id}-${minecraft_version}-neoforge"
 }
 
 
-java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
 java.withSourcesJar()
 
-println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
-minecraft {
+if (file('src/main/resources/META-INF/accesstransformer.cfg').exists()) {
+	minecraft.accessTransformers.file file('src/main/resources/META-INF/accesstransformer.cfg')
+}
 
-	mappings channel: mapping_channel, version: mapping_version
+runs {
+	configureEach {
+		systemProperty 'forge.logging.markers', 'REGISTRIES'
+		systemProperty 'forge.logging.console.level', 'debug'
+		jvmArguments.addAll('-XX:+AllowEnhancedClassRedefinition', '-XX:+IgnoreUnrecognizedVMOptions')
+		modSource project.sourceSets.main
+	}
 
-	//accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
+	client {
+		systemProperty 'forge.enabledGameTestNamespaces', project.mod_id
+		programArgument "--username=Dev"
+	}
 
-	// Default run configurations.
-	// These can be tweaked, removed, or duplicated as needed.
-	runs {
-		client {
-			workingDirectory project.file('run')
-			args '--username', 'OccultismKubeJS'
-			// Recommended logging data for a userdev environment
-			property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+	server {
+		systemProperty 'forge.enabledGameTestNamespaces', project.mod_id
+//        programArgument '--nogui'
+	}
 
-			// Recommended logging level for the console
-			property 'forge.logging.console.level', 'debug'
-
-			//Fix for patchouli mixin crash
-			property 'mixin.env.remapRefMap', 'true'
-			property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
-
-			// enable using JBR to hotswap MOAR
-			// also ignore the option if someone isnt using JBR
-			jvmArgs '-XX:+AllowEnhancedClassRedefinition', '-XX:+IgnoreUnrecognizedVMOptions'
-
-			mods {
-				"${mod_id}" {
-					source sourceSets.main
-				}
-			}
-		}
-
-		server {
-			workingDirectory project.file('run')
-
-			// Recommended logging data for a userdev environment
-			property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
-
-			// Recommended logging level for the console
-			property 'forge.logging.console.level', 'debug'
-
-			//Workaround for patchouli mixin crash
-			property 'mixin.env.disableRefMap', 'true'
-
-			// enable using JBR to hotswap MOAR
-			// also ignore the option if someone isnt using JBR
-			jvmArgs '-XX:+AllowEnhancedClassRedefinition', '-XX:+IgnoreUnrecognizedVMOptions'
-
-			mods {
-				"${mod_id}" {
-					source sourceSets.main
-				}
-			}
-		}
-
-		data {
-			workingDirectory project.file('run')
-
-			// Recommended logging data for a userdev environment
-			property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
-
-			// Recommended logging level for the console
-			property 'forge.logging.console.level', 'debug'
-
-			//Workaround for patchouli mixin crash
-			property 'mixin.env.disableRefMap', 'true'
-
-			// Specify the modid for data generation, where to output the resulting resource, and where to look for existing resources.
-			args '--mod', '${mod_id}', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
-
-			mods {
-				"${mod_id}" {
-					source sourceSets.main
-				}
-			}
-		}
+	data {
+		programArguments.addAll '--mod', project.mod_id, '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
 	}
 }
 
@@ -155,29 +100,15 @@ repositories {
 }
 
 dependencies {
-	// Specify the version of Minecraft to use, If this is any group other then 'net.minecraft' it is assumed
-	// that the dep is a ForgeGradle 'patcher' dependency. And it's patches will be applied.
-	// The userdev artifact is a special name and will get all sorts of transformations applied to it.
-	minecraft "net.minecraftforge:forge:${forge_version}"
+	implementation "net.neoforged:neoforge:${neo_version}"
 
-	implementation fg.deobf("com.klikli_dev:occultism-${minecraft_version}:${occultism_version}"){ transitive = false }
-	//Occultism Transitive Dependencies
-	runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}+${minecraft_version}")
-	runtimeOnly fg.deobf("software.bernie.geckolib:geckolib-forge-${minecraft_version}:${geckolib_version}")
-	runtimeOnly fg.deobf("net.tslat.smartbrainlib:SmartBrainLib-forge-${smartbrainlib_minecraft_version}:${smartbrainlib_version}")
-	runtimeOnly fg.deobf("com.klikli_dev:modonomicon-${minecraft_version}-forge:${modonomicon_version}")
+	implementation "com.klikli_dev:occultism-${minecraft_version}-neoforge:${occultism_version}"
 
-	implementation fg.deobf("dev.latvian.mods:kubejs-forge:${kubejs_version}")
-	//KubeJS Transitive Dependencies
-	implementation fg.deobf("dev.latvian.mods:rhino-forge:${rhino_version}")
-	implementation fg.deobf("dev.architectury:architectury-forge:${architectury_version}")
-
-	//JEI for testing
-	runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge:${jei_version}")
+	implementation "dev.latvian.mods:kubejs-neoforge:${kubejs_version}"
 }
 
 processResources {
-	filesMatching(['META-INF/mods.toml', 'pack.mcmeta']) {
+	filesMatching(['META-INF/neoforge.mods.toml', 'pack.mcmeta']) {
 		expand project.properties
 	}
 }
@@ -243,4 +174,12 @@ publishing {
 
 tasks.withType(JavaCompile).configureEach {
 	options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
+}
+
+// IDEA no longer automatically downloads sources/javadoc jars for dependencies, so we need to explicitly enable the behavior.
+idea {
+	module {
+		downloadSources = true
+		downloadJavadoc = true
+	}
 }
