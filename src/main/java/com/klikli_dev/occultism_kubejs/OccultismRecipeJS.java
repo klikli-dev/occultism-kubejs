@@ -1,21 +1,19 @@
 package com.klikli_dev.occultism_kubejs;
 
 import com.google.gson.JsonElement;
-import com.klikli_dev.occultism.common.misc.OutputIngredient;
-import com.klikli_dev.occultism.common.misc.WeightedOutputIngredient;
-import dev.latvian.mods.kubejs.item.OutputItem;
-import dev.latvian.mods.kubejs.recipe.RecipeJS;
+import com.klikli_dev.occultism.crafting.recipe.result.RecipeResult;
+import com.klikli_dev.occultism.crafting.recipe.result.WeightedRecipeResult;
 
 /**
  * Subclass of RecipeJS to handle parsing of both OutputIngredient and WeightedOutputIngredient
  */
 public class OccultismRecipeJS extends RecipeJS {
 	@Override
-	public OutputItem readOutputItem(Object from) {
-		if (from instanceof OutputIngredient out) {
+	public RecipeResult readOutputItem(Object from) {
+		if (from instanceof RecipeResult out) {
 			// just resolve early lol
 			return OutputItem.of(out.getStack());
-		} else if (from instanceof WeightedOutputIngredient out) {
+		} else if (from instanceof WeightedRecipeResult out) {
 			// once again resolving early, but with a weight this time
 			return OutputItem.of(out.getStack(), out.getWeight().asInt());
 		}

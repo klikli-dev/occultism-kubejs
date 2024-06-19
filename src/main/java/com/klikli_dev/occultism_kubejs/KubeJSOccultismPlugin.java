@@ -24,11 +24,9 @@ package com.klikli_dev.occultism_kubejs;
 
 import com.klikli_dev.occultism.registry.OccultismRecipes;
 import dev.latvian.mods.kubejs.KubeJSPlugin;
-import dev.latvian.mods.kubejs.recipe.schema.RegisterRecipeSchemasEvent;
-import dev.latvian.mods.kubejs.recipe.schema.minecraft.ShapelessRecipeSchema;
 import dev.latvian.mods.kubejs.registry.RegistryInfo;
 
-public class KubeJSOccultismPlugin extends KubeJSPlugin {
+public class KubeJSOccultismPlugin implements KubeJSPlugin {
     @Override
     public void init() {
         RegistryInfo.ITEM.addType("occultism:ritual_dummy", RitualDummyItemType.class, RitualDummyItemType::new);
