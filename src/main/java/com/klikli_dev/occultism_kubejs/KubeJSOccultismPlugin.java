@@ -23,21 +23,27 @@
 package com.klikli_dev.occultism_kubejs;
 
 import com.klikli_dev.occultism.registry.OccultismRecipes;
-import dev.latvian.mods.kubejs.KubeJSPlugin;
+import dev.latvian.mods.kubejs.plugin.KubeJSPlugin;
+import dev.latvian.mods.kubejs.recipe.schema.RecipeSchemaRegistry;
+import dev.latvian.mods.kubejs.recipe.schema.minecraft.ShapelessKubeRecipe;
+import dev.latvian.mods.kubejs.registry.BuilderTypeRegistry;
 import dev.latvian.mods.kubejs.registry.RegistryInfo;
+import net.minecraft.core.registries.Registries;
 
 public class KubeJSOccultismPlugin implements KubeJSPlugin {
     @Override
-    public void init() {
-        RegistryInfo.ITEM.addType("occultism:ritual_dummy", RitualDummyItemType.class, RitualDummyItemType::new);
+    public void registerBuilderTypes(BuilderTypeRegistry registry) {
+        registry.of(Registries.ITEM, (reg)-> {
+            reg.add("occultism:ritual_dummy", RitualDummyItemType.class, RitualDummyItemType::new);
+        });
     }
 
     @Override
-    public void registerRecipeSchemas(RegisterRecipeSchemasEvent event) {
-        event.register(OccultismRecipes.SPIRIT_TRADE.getId(), ShapelessRecipeSchema.SCHEMA); // yes, it REALLY IS just a shapeless recipe lmao
-        event.register(OccultismRecipes.SPIRIT_FIRE.getId(), OccultismRecipeSchema.BASIC);
-        event.register(OccultismRecipes.CRUSHING.getId(), OccultismRecipeSchema.CRUSHING);
-        event.register(OccultismRecipes.MINER.getId(), OccultismRecipeSchema.BASIC);
-        event.register(OccultismRecipes.RITUAL.getId(), RitualRecipeSchema.SCHEMA);
+    public void registerRecipeSchemas(RecipeSchemaRegistry registry) {
+        registry.register(OccultismRecipes.SPIRIT_TRADE.getId(), ShapelessKubeRecipe.RECIPE_FACTORY); // yes, it REALLY IS just a shapeless recipe lmao
+        registry.register(OccultismRecipes.SPIRIT_FIRE.getId(), OccultismRecipeSchema.BASIC);
+        registry.register(OccultismRecipes.CRUSHING.getId(), OccultismRecipeSchema.CRUSHING);
+        registry.register(OccultismRecipes.MINER.getId(), OccultismRecipeSchema.BASIC);
+        registry.register(OccultismRecipes.RITUAL.getId(), RitualRecipeSchema.SCHEMA);
     }
 }
