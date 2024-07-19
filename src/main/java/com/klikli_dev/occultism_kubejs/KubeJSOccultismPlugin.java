@@ -22,8 +22,12 @@
 
 package com.klikli_dev.occultism_kubejs;
 
+import com.klikli_dev.occultism.crafting.recipe.SpiritTradeRecipe;
 import com.klikli_dev.occultism.registry.OccultismRecipes;
 import dev.latvian.mods.kubejs.plugin.KubeJSPlugin;
+import dev.latvian.mods.kubejs.recipe.component.BooleanComponent;
+import dev.latvian.mods.kubejs.recipe.schema.RecipeComponentFactoryRegistry;
+import dev.latvian.mods.kubejs.recipe.schema.RecipeFactoryRegistry;
 import dev.latvian.mods.kubejs.recipe.schema.RecipeSchemaRegistry;
 import dev.latvian.mods.kubejs.recipe.schema.minecraft.ShapelessKubeRecipe;
 import dev.latvian.mods.kubejs.registry.BuilderTypeRegistry;
@@ -40,10 +44,20 @@ public class KubeJSOccultismPlugin implements KubeJSPlugin {
 
     @Override
     public void registerRecipeSchemas(RecipeSchemaRegistry registry) {
-        registry.register(OccultismRecipes.SPIRIT_TRADE.getId(), ShapelessKubeRecipe.RECIPE_FACTORY); // yes, it REALLY IS just a shapeless recipe lmao
+
         registry.register(OccultismRecipes.SPIRIT_FIRE.getId(), OccultismRecipeSchema.BASIC);
-        registry.register(OccultismRecipes.CRUSHING.getId(), OccultismRecipeSchema.CRUSHING);
+//        registry.register(OccultismRecipes.CRUSHING.getId(), OccultismRecipeSchema.CRUSHING);
         registry.register(OccultismRecipes.MINER.getId(), OccultismRecipeSchema.BASIC);
-        registry.register(OccultismRecipes.RITUAL.getId(), RitualRecipeSchema.SCHEMA);
+//        registry.register(OccultismRecipes.RITUAL.getId(), RitualRecipeSchema.SCHEMA);
+    }
+
+    @Override
+    public void registerRecipeFactories(RecipeFactoryRegistry registry) {
+        registry.register(OccultismRecipes.SPIRIT_TRADE.getId(), SpiritTradeRecipe.class,ShapelessKubeRecipe.RECIPE_FACTORY.factory()); // yes, it REALLY IS just a shapeless recipe lmao
+    }
+
+    @Override
+    public void registerRecipeComponents(RecipeComponentFactoryRegistry registry) {
+        registry.register(RecipeResultComponent.RECIPE_RESULT);
     }
 }
