@@ -108,7 +108,7 @@ dependencies {
 }
 
 processResources {
-	filesMatching(['META-INF/neoforge.mods.toml', 'pack.mcmeta']) {
+	filesMatching(['META-INF/neoforge.mods.toml']) {
 		expand project.properties
 	}
 }
