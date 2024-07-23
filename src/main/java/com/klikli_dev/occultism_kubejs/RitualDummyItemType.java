@@ -24,14 +24,21 @@ package com.klikli_dev.occultism_kubejs;
 
 import com.google.gson.JsonObject;
 import com.klikli_dev.occultism.common.item.DummyTooltipItem;
+import dev.latvian.mods.kubejs.client.LangKubeEvent;
 import dev.latvian.mods.kubejs.item.ItemBuilder;
+import dev.latvian.mods.kubejs.typings.Info;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 
 
 public class RitualDummyItemType extends ItemBuilder {
+    public Component ritualTooltip;
+
     public RitualDummyItemType(ResourceLocation rl) {
         super(rl);
+
+        this.ritualTooltip = Component.empty();
 
         //make the item just use the ritual dummy parent mode
         //Note:  we are not using this.parentModel() because it causes textures to be overwritten with a texture location corresponding to the item id unless the correct one is manually specified again
@@ -45,5 +52,23 @@ public class RitualDummyItemType extends ItemBuilder {
         return new DummyTooltipItem(this.createItemProperties());
     }
 
+    @Override
+    public void generateLang(LangKubeEvent lang) {
+        super.generateLang(lang);
 
+        if (this.ritualTooltip != null) {
+            lang.add(this.id.getNamespace(), this.getBuilderTranslationKey() + ".tooltip", this.ritualTooltip.getString());
+        }
+    }
+
+    @Info("""
+            Sets the tooltip to display for the ritual dummy.
+            It should explain what the ritual does.
+
+            This will be overridden by a lang file if it exists.
+            """)
+    public RitualDummyItemType ritualTooltip(Component ritualTooltip) {
+        this.ritualTooltip = ritualTooltip;
+        return this;
+    }
 }

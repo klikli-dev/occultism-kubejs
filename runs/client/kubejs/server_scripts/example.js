@@ -14,7 +14,8 @@ ServerEvents.recipes((event) => {
     //     '#minecraft:swords'
     // )
     // event.recipes.occultism.miner(
-    //     Item.of('minecraft:wooden_pickaxe').withChance(100),
+    //     //item, count, weight
+    //     WeightedRecipeResult.of('minecraft:wooden_pickaxe', 1, 100),
     //     '#occultism:miners/master'
     // )
     // event.recipes.occultism.ritual(
