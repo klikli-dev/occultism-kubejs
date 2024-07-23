@@ -45,15 +45,11 @@ public class KubeJSOccultismPlugin implements KubeJSPlugin {
     @Override
     public void registerRecipeSchemas(RecipeSchemaRegistry registry) {
 
-        registry.register(OccultismRecipes.SPIRIT_FIRE.getId(), OccultismRecipeSchema.BASIC);
-//        registry.register(OccultismRecipes.CRUSHING.getId(), OccultismRecipeSchema.CRUSHING);
-        registry.register(OccultismRecipes.MINER.getId(), OccultismRecipeSchema.BASIC);
+        registry.register(OccultismRecipes.SPIRIT_FIRE.getId(), OccultismRecipeSchema.SPIRIT_FIRE);
+        registry.register(OccultismRecipes.SPIRIT_TRADE.getId(), OccultismRecipeSchema.SPIRIT_TRADE);
+        registry.register(OccultismRecipes.CRUSHING.getId(), OccultismRecipeSchema.CRUSHING);
+//        registry.register(OccultismRecipes.MINER.getId(), OccultismRecipeSchema.BASIC);
 //        registry.register(OccultismRecipes.RITUAL.getId(), RitualRecipeSchema.SCHEMA);
-    }
-
-    @Override
-    public void registerRecipeFactories(RecipeFactoryRegistry registry) {
-        registry.register(OccultismRecipes.SPIRIT_TRADE.getId(), SpiritTradeRecipe.class,ShapelessKubeRecipe.RECIPE_FACTORY.factory()); // yes, it REALLY IS just a shapeless recipe lmao
     }
 
     @Override
