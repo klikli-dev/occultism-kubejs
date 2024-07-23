@@ -26,6 +26,7 @@ public record RecipeResultComponent(String name, Codec<RecipeResult> codec) impl
 
     @Override
     public RecipeResult wrap(Context cx, KubeRecipe recipe, Object from) {
+        //TODO: add string parsing like IngredientJS.java does
         if (from instanceof RecipeResult k) {
             return k;
         }
@@ -34,6 +35,7 @@ public record RecipeResultComponent(String name, Codec<RecipeResult> codec) impl
             return this.codec.decode(JsonOps.INSTANCE, json).result().orElseThrow().getFirst();
         }
 
-        throw new IllegalArgumentException("Cannot convert " + from + " to RecipeResult");
+        return (RecipeResult) cx.jsToJava(from, this.typeInfo());
+
     }
 }

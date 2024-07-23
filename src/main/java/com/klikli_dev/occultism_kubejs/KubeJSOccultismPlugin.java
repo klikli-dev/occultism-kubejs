@@ -23,7 +23,10 @@
 package com.klikli_dev.occultism_kubejs;
 
 import com.klikli_dev.occultism.crafting.recipe.SpiritTradeRecipe;
+import com.klikli_dev.occultism.crafting.recipe.result.RecipeResult;
 import com.klikli_dev.occultism.registry.OccultismRecipes;
+import dev.latvian.mods.kubejs.bindings.ItemWrapper;
+import dev.latvian.mods.kubejs.item.ingredient.IngredientJS;
 import dev.latvian.mods.kubejs.plugin.KubeJSPlugin;
 import dev.latvian.mods.kubejs.recipe.component.BooleanComponent;
 import dev.latvian.mods.kubejs.recipe.schema.RecipeComponentFactoryRegistry;
@@ -32,7 +35,11 @@ import dev.latvian.mods.kubejs.recipe.schema.RecipeSchemaRegistry;
 import dev.latvian.mods.kubejs.recipe.schema.minecraft.ShapelessKubeRecipe;
 import dev.latvian.mods.kubejs.registry.BuilderTypeRegistry;
 import dev.latvian.mods.kubejs.registry.RegistryInfo;
+import dev.latvian.mods.kubejs.script.BindingRegistry;
+import dev.latvian.mods.kubejs.script.TypeWrapperRegistry;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.neoforged.neoforge.common.Tags;
 
 public class KubeJSOccultismPlugin implements KubeJSPlugin {
     @Override
@@ -55,5 +62,15 @@ public class KubeJSOccultismPlugin implements KubeJSPlugin {
     @Override
     public void registerRecipeComponents(RecipeComponentFactoryRegistry registry) {
         registry.register(RecipeResultComponent.RECIPE_RESULT);
+    }
+
+    @Override
+    public void registerBindings(BindingRegistry bindings) {
+        bindings.add("RecipeResult", RecipeResultWrapper.class);
+    }
+
+    @Override
+    public void registerTypeWrappers(TypeWrapperRegistry registry) {
+        registry.register(RecipeResult.class, RecipeResultWrapper::wrap);
     }
 }
