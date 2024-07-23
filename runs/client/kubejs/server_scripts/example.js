@@ -18,14 +18,14 @@ ServerEvents.recipes((event) => {
     //     WeightedRecipeResult.of('minecraft:wooden_pickaxe', 1, 100),
     //     '#occultism:miners/master'
     // )
-    // event.recipes.occultism.ritual(
-    //     'occultism:spirit_lantern',
-    //     [
-    //         "lapis_lazuli",
-    //         "#c:raw_materials",
-    //         ["minecraft:coal", 'minecraft:charcoal'],
-    //     ],
-    //     '#c:stone',
-    //     'occultism:craft_afrit'
-    // ).dummy("kubejs:dummy_ritual_thing").useItem('minecraft:egg')
+    event.recipes.occultism.ritual(
+        'occultism:spirit_lantern',
+        [
+            "lapis_lazuli",
+            "#c:raw_materials",
+            "minecraft:coal"
+        ],
+        '#c:stones',
+        'occultism:craft_afrit'
+    ).dummy("kubejs:dummy_ritual_thing").useItem('minecraft:egg')
 })

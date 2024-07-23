@@ -6,11 +6,11 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import dev.latvian.mods.kubejs.KubeJS;
 import dev.latvian.mods.kubejs.bindings.DataComponentWrapper;
 import dev.latvian.mods.kubejs.item.ItemStackJS;
-import dev.latvian.mods.kubejs.registry.RegistryInfo;
 import dev.latvian.mods.kubejs.typings.Info;
 import dev.latvian.mods.kubejs.util.RegistryAccessContainer;
 import dev.latvian.mods.rhino.Wrapper;
 import net.minecraft.core.component.DataComponentPredicate;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
@@ -106,7 +106,7 @@ public interface WeightedRecipeResultWrapper {
             }
             default -> {
                 var itemId = ResourceLocation.read(reader);
-                var item = RegistryInfo.ITEM.getValue(itemId);
+                var item = BuiltInRegistries.ITEM.get(itemId);
 
                 var next = reader.canRead() ? reader.peek() : 0;
 
