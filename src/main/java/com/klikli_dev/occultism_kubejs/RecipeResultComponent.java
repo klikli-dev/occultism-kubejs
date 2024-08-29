@@ -10,7 +10,7 @@ import dev.latvian.mods.rhino.Context;
 import dev.latvian.mods.rhino.type.TypeInfo;
 
 public record RecipeResultComponent(String name, Codec<RecipeResult> codec) implements RecipeComponent<RecipeResult> {
-    public static final RecipeComponent<RecipeResult> RECIPE_RESULT = new RecipeResultComponent("recipe_result", RecipeResult.CODEC);
+    public static final RecipeComponent<RecipeResult> RECIPE_RESULT = new RecipeResultComponent("occultism:recipe_result", RecipeResult.CODEC);
 
     public static final TypeInfo TYPE_INFO = TypeInfo.of(RecipeResultComponent.class);
 

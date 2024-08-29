@@ -48,7 +48,7 @@ public class KubeJSOccultismPlugin implements KubeJSPlugin {
         registry.register(OccultismRecipes.SPIRIT_TRADE.getId(), OccultismRecipeSchema.SPIRIT_TRADE);
         registry.register(OccultismRecipes.CRUSHING.getId(), OccultismRecipeSchema.CRUSHING);
         registry.register(OccultismRecipes.MINER.getId(), OccultismRecipeSchema.MINER);
-        registry.register(OccultismRecipes.RITUAL.getId(), RitualRecipeSchema.SCHEMA);
+//        registry.register(OccultismRecipes.RITUAL.getId(), RitualRecipeSchema.SCHEMA); //now loaded from json
     }
 
     @Override

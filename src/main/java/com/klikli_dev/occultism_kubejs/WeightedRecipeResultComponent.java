@@ -10,7 +10,7 @@ import dev.latvian.mods.rhino.Context;
 import dev.latvian.mods.rhino.type.TypeInfo;
 
 public record WeightedRecipeResultComponent(String name, Codec<WeightedRecipeResult> codec) implements RecipeComponent<WeightedRecipeResult> {
-    public static final RecipeComponent<WeightedRecipeResult> WEIGHTED_RECIPE_RESULT = new WeightedRecipeResultComponent("weighted_recipe_result", WeightedRecipeResult.CODEC);
+    public static final RecipeComponent<WeightedRecipeResult> WEIGHTED_RECIPE_RESULT = new WeightedRecipeResultComponent("occultism:weighted_recipe_result", WeightedRecipeResult.CODEC);
 
     public static final TypeInfo TYPE_INFO = TypeInfo.of(WeightedRecipeResultComponent.class);
 

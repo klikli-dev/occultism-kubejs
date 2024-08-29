@@ -3,6 +3,7 @@ package com.klikli_dev.occultism_kubejs;
 import dev.latvian.mods.kubejs.recipe.RecipeKey;
 import dev.latvian.mods.kubejs.recipe.component.*;
 import dev.latvian.mods.kubejs.recipe.schema.RecipeSchema;
+import dev.latvian.mods.kubejs.util.TickDuration;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -21,7 +22,7 @@ public interface RitualRecipeSchema {
     RecipeKey<String> ENTITY_NBT = StringComponent.ANY.inputKey("entity_nbt").alt("entityNbt").defaultOptional();
     RecipeKey<Ingredient> ACTIVATION_ITEM = IngredientComponent.INGREDIENT.inputKey("activation_item").alt("activationItem");
     RecipeKey<String> PENTACLE_ID = StringComponent.ID.inputKey("pentacle_id").alt("pentacleId").alt("pentacle");
-    RecipeKey<Integer> DURATION = NumberComponent.INT.inputKey("duration").optional(30);
+    RecipeKey<TickDuration> DURATION = TimeComponent.TICKS.inputKey("duration").optional(TickDuration.wrap(30));
     RecipeKey<Integer> SPIRIT_MAX_AGE = NumberComponent.INT.inputKey("spirit_max_age").alt("spiritMaxAge").alt("maxAge").optional(-1);
     RecipeKey<String> SPIRIT_JOB_TYPE = StringComponent.ID.inputKey("spirit_job_type").alt("spiritJobType").alt("jobType").defaultOptional();
     RecipeKey<ItemStack> RITUAL_DUMMY = ItemStackComponent.ITEM_STACK.outputKey("ritual_dummy").alt("ritualDummy").alt("dummyItem").alt("dummy")
@@ -31,11 +32,11 @@ public interface RitualRecipeSchema {
 
     RecipeKey<?> ENTITY_TO_SACRIFICE =
             RecipeComponent.builder(
-                    new RecipeComponentBuilder.Key("tag", TagKeyComponent.ENTITY_TYPE),
-                    new RecipeComponentBuilder.Key("display_name", StringComponent.ANY)
-            )
-            .inputKey("entity_to_sacrifice").alt("entityToSacrifice").alt("sacrifice")
-            .defaultOptional();
+                            new RecipeComponentBuilder.Key("tag", TagKeyComponent.ENTITY_TYPE),
+                            new RecipeComponentBuilder.Key("display_name", StringComponent.ANY)
+                    )
+                    .inputKey("entity_to_sacrifice").alt("entityToSacrifice").alt("sacrifice")
+                    .defaultOptional();
     RecipeKey<Ingredient> ITEM_TO_USE = IngredientComponent.INGREDIENT.inputKey("item_to_use")
             .alt("itemToUse").alt("useItem").optional(Ingredient.EMPTY).allowEmpty();
     RecipeKey<String> COMMAND = StringComponent.ANY.inputKey("command").defaultOptional();
@@ -45,8 +46,7 @@ public interface RitualRecipeSchema {
             RESULT, INGREDIENTS, ACTIVATION_ITEM, PENTACLE_ID,
             // and now all the optionals...
             DURATION, SPIRIT_MAX_AGE, SPIRIT_JOB_TYPE, RITUAL_DUMMY, RITUAL_TYPE,
-            // excluded keys last
             ENTITY_TO_SUMMON, ENTITY_TAG_TO_SUMMON, ENTITY_NBT, ENTITY_TO_SACRIFICE, ITEM_TO_USE, COMMAND
-    );
+    ).uniqueId(RITUAL_DUMMY);
 
 }

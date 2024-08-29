@@ -1,0 +1,142 @@
+{
+  "keys": [
+    {
+      "name": "result",
+      "role": "output",
+      "type": "item_stack",
+      "allow_empty": true
+    },
+    {
+      "name": "ingredients",
+      "role": "input",
+      "type": "ingredient[]"
+    },
+    {
+      "name": "activation_item",
+      "role": "input",
+      "type": "ingredient",
+      "alternative_names": [
+        "activationItem"
+      ]
+    },
+    {
+      "name": "pentacle_id",
+      "role": "input",
+      "type": "id",
+      "alternative_names": [
+        "pentacleId",
+        "pentacle"
+      ]
+    },
+    {
+      "name": "duration",
+      "role": "input",
+      "type": "ticks",
+      "optional": 30
+    },
+    {
+      "name": "spirit_max_age",
+      "role": "input",
+      "type": "int",
+      "optional": -1,
+      "alternative_names": [
+        "spiritMaxAge",
+        "maxAge"
+      ]
+    },
+    {
+      "name": "spirit_job_type",
+      "role": "input",
+      "type": "id",
+      "optional": null,
+      "alternative_names": [
+        "spiritJobType",
+        "jobType"
+      ]
+    },
+    {
+      "name": "ritual_dummy",
+      "role": "output",
+      "type": "item_stack",
+      "optional": {
+        "id": "occultism:ritual_dummy/custom_ritual",
+        "count": 1
+      },
+      "alternative_names": [
+        "ritualDummy",
+        "dummyItem",
+        "dummy"
+      ],
+      "always_write": true
+    },
+    {
+      "name": "ritual_type",
+      "role": "input",
+      "type": "id",
+      "optional": "occultism:craft",
+      "alternative_names": [
+        "ritualType"
+      ],
+      "always_write": true
+    },
+    {
+      "name": "entity_to_summon",
+      "role": "input",
+      "type": "id",
+      "optional": null,
+      "alternative_names": [
+        "entityToSummon",
+        "summon"
+      ]
+    },
+    {
+      "name": "entity_tag_to_summon",
+      "role": "input",
+      "type": "entity_type_tag",
+      "optional": null,
+      "alternative_names": [
+        "entityTagToSummon",
+        "summonTag"
+      ]
+    },
+    {
+      "name": "entity_nbt",
+      "role": "input",
+      "type": "string",
+      "optional": null,
+      "alternative_names": [
+        "entityNbt"
+      ]
+    },
+    {
+      "name": "entity_to_sacrifice",
+      "role": "input",
+      "type": "{tag: entity_type_tag, display_name: string}",
+      "optional": null,
+      "alternative_names": [
+        "entityToSacrifice",
+        "sacrifice"
+      ]
+    },
+    {
+      "name": "item_to_use",
+      "role": "input",
+      "type": "ingredient",
+      "optional": [],
+      "alternative_names": [
+        "itemToUse",
+        "useItem"
+      ],
+      "allow_empty": true
+    },
+    {
+      "name": "command",
+      "role": "input",
+      "type": "string",
+      "optional": null
+    }
+  ],
+  "unique": [
+    "ritual_dummy"
+  ]
+}
