@@ -154,6 +154,10 @@ processResources {
 		}
 	}
 
+	if (System.getenv('MOD_VERSION') != null) {
+		props.put('mod_version', System.getenv('MOD_VERSION'))
+	}
+
 	filesMatching(['META-INF/neoforge.mods.toml']) {
 		expand props
 	}
