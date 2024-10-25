@@ -43,7 +43,7 @@ public class RitualDummyItemType extends ItemBuilder {
         //make the item just use the ritual dummy parent mode
         //Note:  we are not using this.parentModel() because it causes textures to be overwritten with a texture location corresponding to the item id unless the correct one is manually specified again
         //Note: We now use parentModel because this.itemModel is gone, instead we fix the texture issue in generateAssets
-        this.parentModel(ResourceLocation.parse("occultism:item/ritual_dummy"));
+        this.parentModel(ResourceLocation.parse("occultism:item/pentacle_misc"));
     }
 
     @Override
@@ -64,7 +64,6 @@ public class RitualDummyItemType extends ItemBuilder {
         });
     }
 
-
     @Override
     public void generateLang(LangKubeEvent lang) {
         super.generateLang(lang);
@@ -72,6 +71,15 @@ public class RitualDummyItemType extends ItemBuilder {
         if (this.ritualTooltip != null) {
             lang.add(this.id.getNamespace(), this.getBuilderTranslationKey() + ".tooltip", this.ritualTooltip.getString());
         }
+    }
+
+    @Info("""
+            Determines the type of texture shown for the ritual dummy.
+            Valid options are: "misc", "craft", "summon", "possess".
+            """)
+    public RitualDummyItemType pentacleType(String pentacleType) {
+        this.parentModel(ResourceLocation.parse("occultism:item/pentacle_" + pentacleType));
+        return this;
     }
 
     @Info("""
