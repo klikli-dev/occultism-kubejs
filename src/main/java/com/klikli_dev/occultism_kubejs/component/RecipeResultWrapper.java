@@ -5,9 +5,10 @@ import com.mojang.brigadier.StringReader;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import dev.latvian.mods.kubejs.KubeJS;
 import dev.latvian.mods.kubejs.component.DataComponentWrapper;
-import dev.latvian.mods.kubejs.item.ItemStackJS;
+import dev.latvian.mods.kubejs.plugin.builtin.wrapper.ItemWrapper;
 import dev.latvian.mods.kubejs.typings.Info;
 import dev.latvian.mods.kubejs.util.RegistryAccessContainer;
+import dev.latvian.mods.rhino.Context;
 import dev.latvian.mods.rhino.Wrapper;
 import net.minecraft.core.component.DataComponentPredicate;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -32,7 +33,7 @@ public interface RecipeResultWrapper {
         return in.copyWithCount(count);
     }
 
-    static RecipeResult wrap(RegistryAccessContainer registries, @Nullable Object o) {
+    static RecipeResult wrap(Context cx, @Nullable Object o) {
         while (o instanceof Wrapper w) {
             o = w.unwrap();
         }
@@ -46,14 +47,14 @@ public interface RecipeResultWrapper {
 //            return ofJson(registries, json);
 //        }
         else if (o instanceof CharSequence) {
-            return ofString(registries, o.toString());
+            return ofString(cx, o.toString());
         }
 
 
-        return RecipeResult.of(ItemStackJS.wrap(registries, o));
+        return RecipeResult.of(ItemWrapper.wrap(cx, o));
     }
 
-    static RecipeResult ofString(RegistryAccessContainer registries, String s) {
+    static RecipeResult ofString(Context registries, String s) {
         if (s.isEmpty() || s.equals("-") || s.equals("air") || s.equals("minecraft:air")) {
             return RecipeResult.of(ItemStack.EMPTY);
         } else if (s.equals("*")) {
@@ -68,7 +69,7 @@ public interface RecipeResultWrapper {
         }
     }
 
-    static RecipeResult read(RegistryAccessContainer registries, StringReader reader) throws CommandSyntaxException {
+    static RecipeResult read(Context cx, StringReader reader) throws CommandSyntaxException {
         if (!reader.canRead()) {
             return RecipeResult.of(ItemStack.EMPTY);
         }
@@ -107,7 +108,7 @@ public interface RecipeResultWrapper {
                 var next = reader.canRead() ? reader.peek() : 0;
 
                 if (next == '[' || next == '{') {
-                    var components = DataComponentWrapper.readPredicate(registries.nbt(), reader);
+                    var components = DataComponentWrapper.readPredicate(RegistryAccessContainer.of(cx).nbt(), reader);
 
                     if (components != DataComponentPredicate.EMPTY) {
                         //noinspection deprecation

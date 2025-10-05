@@ -1,7 +1,6 @@
 package com.klikli_dev.occultism_kubejs;
 
 import com.klikli_dev.occultism.crafting.recipe.RitualRecipe;
-import com.klikli_dev.occultism.registry.OccultismItems;
 import com.klikli_dev.occultism_kubejs.component.ConditionComponent;
 import com.klikli_dev.occultism_kubejs.component.EntityToSacrificeComponent;
 import dev.latvian.mods.kubejs.recipe.RecipeKey;
@@ -19,12 +18,12 @@ import net.neoforged.neoforge.common.conditions.ICondition;
 import java.util.List;
 
 public interface RitualRecipeSchema {
-    RecipeKey<ItemStack> RESULT = ItemStackComponent.ITEM_STACK.outputKey("result").allowEmpty();
-    RecipeKey<List<Ingredient>> INGREDIENTS = IngredientComponent.INGREDIENT.asList().inputKey("ingredients");
+    RecipeKey<ItemStack> RESULT = ItemStackComponent.OPTIONAL_ITEM_STACK.outputKey("result");
+    RecipeKey<List<Ingredient>> INGREDIENTS = IngredientComponent.INGREDIENT.instance().asList().inputKey("ingredients");
     RecipeKey<String> RITUAL_TYPE = StringComponent.ID.inputKey("ritual_type").alt("ritualType").optional("occultism:craft").alwaysWrite();
     RecipeKey<String> ENTITY_TO_SUMMON = StringComponent.ID.inputKey("entity_to_summon").alt("entityToSummon").alt("summon").defaultOptional();
     RecipeKey<TagKey<EntityType<?>>> ENTITY_TAG_TO_SUMMON = TagKeyComponent.ENTITY_TYPE.inputKey("entity_tag_to_summon").alt("entityTagToSummon").alt("summonTag").defaultOptional();
-    RecipeKey<String> ENTITY_NBT = StringComponent.ANY.inputKey("entity_nbt").alt("entityNbt").defaultOptional();
+    RecipeKey<String> ENTITY_NBT = StringComponent.STRING.inputKey("entity_nbt").alt("entityNbt").defaultOptional();
     RecipeKey<Ingredient> ACTIVATION_ITEM = IngredientComponent.INGREDIENT.inputKey("activation_item").alt("activationItem");
     RecipeKey<String> PENTACLE_ID = StringComponent.ID.inputKey("pentacle_id").alt("pentacleId").alt("pentacle");
     RecipeKey<TickDuration> DURATION = TimeComponent.TICKS.inputKey("duration").optional(TickDuration.wrap(30));
@@ -39,9 +38,9 @@ public interface RitualRecipeSchema {
     RecipeKey<RitualRecipe.EntityToSacrifice> ENTITY_TO_SACRIFICE = EntityToSacrificeComponent.ENTITY_TO_SACRIFICE
             .inputKey("entity_to_sacrifice").alt("entityToSacrifice").alt("sacrifice")
             .defaultOptional();
-    RecipeKey<Ingredient> ITEM_TO_USE = IngredientComponent.INGREDIENT.inputKey("item_to_use")
-            .alt("itemToUse").alt("useItem").optional(Ingredient.EMPTY).allowEmpty();
-    RecipeKey<String> COMMAND = StringComponent.ANY.inputKey("command").defaultOptional();
+    RecipeKey<Ingredient> ITEM_TO_USE = IngredientComponent.OPTIONAL_INGREDIENT.inputKey("item_to_use")
+            .alt("itemToUse").alt("useItem").optional(Ingredient.EMPTY);
+    RecipeKey<String> COMMAND = StringComponent.STRING.inputKey("command").defaultOptional();
     RecipeKey<ICondition> CONDITION = ConditionComponent.CONDITION.inputKey("condition").alt("startCondition").defaultOptional();
 
     RecipeSchema SCHEMA = new RecipeSchema(
