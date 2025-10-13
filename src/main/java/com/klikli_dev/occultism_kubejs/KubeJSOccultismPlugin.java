@@ -27,7 +27,7 @@ import com.klikli_dev.occultism.crafting.recipe.result.WeightedRecipeResult;
 import com.klikli_dev.occultism.registry.OccultismRecipes;
 import com.klikli_dev.occultism_kubejs.component.*;
 import dev.latvian.mods.kubejs.plugin.KubeJSPlugin;
-import dev.latvian.mods.kubejs.recipe.schema.RecipeComponentFactoryRegistry;
+import dev.latvian.mods.kubejs.recipe.component.RecipeComponentTypeRegistry;
 import dev.latvian.mods.kubejs.recipe.schema.RecipeSchemaRegistry;
 import dev.latvian.mods.kubejs.registry.BuilderTypeRegistry;
 import dev.latvian.mods.kubejs.script.BindingRegistry;
@@ -38,7 +38,7 @@ public class KubeJSOccultismPlugin implements KubeJSPlugin {
     @Override
     public void registerBuilderTypes(BuilderTypeRegistry registry) {
         registry.of(Registries.ITEM, (reg) -> {
-            reg.add("occultism:ritual_dummy", RitualDummyItemType.class, RitualDummyItemType::new);
+            reg.add(OccultismKubeJS.loc("ritual_dummy"), RitualDummyItemType.class, RitualDummyItemType::new);
         });
     }
 
@@ -52,7 +52,7 @@ public class KubeJSOccultismPlugin implements KubeJSPlugin {
     }
 
     @Override
-    public void registerRecipeComponents(RecipeComponentFactoryRegistry registry) {
+    public void registerRecipeComponents(RecipeComponentTypeRegistry registry) {
         registry.register(RecipeResultComponent.RECIPE_RESULT);
         registry.register(WeightedRecipeResultComponent.WEIGHTED_RECIPE_RESULT);
         registry.register(EntityToSacrificeComponent.ENTITY_TO_SACRIFICE);

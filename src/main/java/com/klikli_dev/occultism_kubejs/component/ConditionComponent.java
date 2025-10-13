@@ -1,19 +1,24 @@
 package com.klikli_dev.occultism_kubejs.component;
 
 import com.google.gson.JsonObject;
-import com.klikli_dev.occultism.crafting.recipe.RitualRecipe;
+import com.klikli_dev.occultism_kubejs.OccultismKubeJS;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.JsonOps;
-import dev.latvian.mods.kubejs.recipe.KubeRecipe;
+import dev.latvian.mods.kubejs.recipe.RecipeScriptContext;
 import dev.latvian.mods.kubejs.recipe.component.RecipeComponent;
-import dev.latvian.mods.rhino.Context;
+import dev.latvian.mods.kubejs.recipe.component.RecipeComponentType;
 import dev.latvian.mods.rhino.type.TypeInfo;
 import net.neoforged.neoforge.common.conditions.ICondition;
 
-public record ConditionComponent(String name, Codec<ICondition> codec) implements RecipeComponent<ICondition> {
-    public static final RecipeComponent<ICondition> CONDITION = new ConditionComponent("occultism:condition", ICondition.CODEC);
+public record ConditionComponent(Codec<ICondition> codec) implements RecipeComponent<ICondition> {
+    public static final RecipeComponentType<ICondition> CONDITION = RecipeComponentType.unit(OccultismKubeJS.loc("condition"), new ConditionComponent(ICondition.CODEC));
 
     public static final TypeInfo TYPE_INFO = TypeInfo.of(ConditionComponent.class);
+
+    @Override
+    public RecipeComponentType<?> type() {
+        return CONDITION;
+    }
 
     @Override
     public TypeInfo typeInfo() {
@@ -22,11 +27,11 @@ public record ConditionComponent(String name, Codec<ICondition> codec) implement
 
     @Override
     public String toString() {
-        return this.name;
+        return type().toString();
     }
 
     @Override
-    public ICondition wrap(Context cx, KubeRecipe recipe, Object from) {
+    public ICondition wrap(RecipeScriptContext cx, Object from) {
         if (from instanceof ICondition k) {
             return k;
         }
@@ -35,6 +40,6 @@ public record ConditionComponent(String name, Codec<ICondition> codec) implement
             return this.codec.decode(JsonOps.INSTANCE, json).result().orElseThrow().getFirst();
         }
 
-        return (ICondition) cx.jsToJava(from, this.typeInfo());
+        return (ICondition) cx.cx().jsToJava(from, this.typeInfo());
     }
 }
