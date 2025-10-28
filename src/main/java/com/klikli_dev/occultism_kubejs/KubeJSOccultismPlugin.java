@@ -24,8 +24,17 @@ package com.klikli_dev.occultism_kubejs;
 
 import com.klikli_dev.occultism.crafting.recipe.result.RecipeResult;
 import com.klikli_dev.occultism.crafting.recipe.result.WeightedRecipeResult;
-import com.klikli_dev.occultism.registry.OccultismRecipes;
-import com.klikli_dev.occultism_kubejs.component.*;
+import com.klikli_dev.occultism_kubejs.component.ConditionComponent;
+import com.klikli_dev.occultism_kubejs.component.EntityToSacrificeComponent;
+import com.klikli_dev.occultism_kubejs.component.EntityToSacrificeWrapper;
+import com.klikli_dev.occultism_kubejs.component.IsInBiomeConditionWrapper;
+import com.klikli_dev.occultism_kubejs.component.IsInBiomeWithTagConditionWrapper;
+import com.klikli_dev.occultism_kubejs.component.IsInDimensionConditionWrapper;
+import com.klikli_dev.occultism_kubejs.component.IsInDimensionTypeConditionWrapper;
+import com.klikli_dev.occultism_kubejs.component.RecipeResultComponent;
+import com.klikli_dev.occultism_kubejs.component.RecipeResultWrapper;
+import com.klikli_dev.occultism_kubejs.component.WeightedRecipeResultComponent;
+import com.klikli_dev.occultism_kubejs.component.WeightedRecipeResultWrapper;
 import dev.latvian.mods.kubejs.plugin.KubeJSPlugin;
 import dev.latvian.mods.kubejs.recipe.component.RecipeComponentTypeRegistry;
 import dev.latvian.mods.kubejs.recipe.schema.RecipeSchemaRegistry;
@@ -44,11 +53,12 @@ public class KubeJSOccultismPlugin implements KubeJSPlugin {
 
     @Override
     public void registerRecipeSchemas(RecipeSchemaRegistry registry) {
-        registry.register(OccultismRecipes.SPIRIT_FIRE.getId(), OccultismRecipeSchema.SPIRIT_FIRE);
+        // keeping these around just in case we move back to code or something similar
+       /* registry.register(OccultismRecipes.SPIRIT_FIRE.getId(), OccultismRecipeSchema.SPIRIT_FIRE);
         registry.register(OccultismRecipes.SPIRIT_TRADE.getId(), OccultismRecipeSchema.SPIRIT_TRADE);
         registry.register(OccultismRecipes.CRUSHING.getId(), OccultismRecipeSchema.CRUSHING);
         registry.register(OccultismRecipes.MINER.getId(), OccultismRecipeSchema.MINER);
-        registry.register(OccultismRecipes.RITUAL.getId(), RitualRecipeSchema.SCHEMA);
+        registry.register(OccultismRecipes.RITUAL.getId(), RitualRecipeSchema.SCHEMA);*/
     }
 
     @Override

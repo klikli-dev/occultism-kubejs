@@ -1,0 +1,14 @@
+{
+	"keys": [
+		{
+			"name": "result",
+			"role": "output",
+			"type": "occultism_kubejs:weighted_recipe_result"
+		},
+		{
+			"name": "ingredient",
+			"role": "input",
+			"type": "ingredient"
+		}
+	]
+}

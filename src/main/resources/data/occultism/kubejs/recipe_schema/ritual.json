@@ -1,0 +1,154 @@
+{
+	"keys": [
+		{
+			"name": "result",
+			"role": "output",
+			"type": "optional_item_stack"
+		},
+		{
+			"name": "ingredients",
+			"role": "input",
+			"type": {
+				"component": "ingredient",
+				"type": "list"
+			}
+		},
+		{
+			"name": "activation_item",
+			"role": "input",
+			"type": "ingredient",
+			"alternative_names": [
+				"activationItem"
+			]
+		},
+		{
+			"name": "pentacle_id",
+			"role": "input",
+			"type": "id",
+			"alternative_names": [
+				"pentacleId",
+				"pentacle"
+			]
+		},
+		{
+			"name": "duration",
+			"role": "input",
+			"type": "ticks",
+			"optional": 30
+		},
+		{
+			"name": "spirit_max_age",
+			"role": "input",
+			"type": {
+				"type": "int"
+			},
+			"optional": -1,
+			"alternative_names": [
+				"spiritMaxAge",
+				"maxAge"
+			]
+		},
+		{
+			"name": "spirit_job_type",
+			"role": "input",
+			"type": "id",
+			"default_optional": true,
+			"alternative_names": [
+				"spiritJobType",
+				"jobType"
+			]
+		},
+		{
+			"name": "ritual_dummy",
+			"role": "output",
+			"type": "item_stack",
+			"optional": {
+				"id": "occultism:ritual_dummy/custom_ritual_misc",
+				"count": 1
+			},
+			"alternative_names": [
+				"ritualDummy",
+				"dummyItem",
+				"dummy"
+			],
+			"always_write": true
+		},
+		{
+			"name": "ritual_type",
+			"role": "input",
+			"type": "id",
+			"optional": "occultism:craft",
+			"alternative_names": [
+				"ritualType"
+			],
+			"always_write": true
+		},
+		{
+			"name": "entity_to_summon",
+			"role": "input",
+			"type": "id",
+			"default_optional": true,
+			"alternative_names": [
+				"entityToSummon",
+				"summon"
+			]
+		},
+		{
+			"name": "entity_tag_to_summon",
+			"role": "input",
+			"type": "entity_type_tag",
+			"default_optional": true,
+			"alternative_names": [
+				"entityTagToSummon",
+				"summonTag"
+			]
+		},
+		{
+			"name": "entity_nbt",
+			"role": "input",
+			"type": "string",
+			"default_optional": true,
+			"alternative_names": [
+				"entityNbt"
+			]
+		},
+		{
+			"name": "entity_to_sacrifice",
+			"role": "input",
+			"type": "occultism_kubejs:entity_to_sacrifice",
+			"default_optional": true,
+			"alternative_names": [
+				"entityToSacrifice",
+				"sacrifice"
+			]
+		},
+		{
+			"name": "item_to_use",
+			"role": "input",
+			"type": "optional_ingredient",
+			"optional": [],
+			"alternative_names": [
+				"itemToUse",
+				"useItem"
+			]
+		},
+		{
+			"name": "command",
+			"role": "input",
+			"type": "string",
+			"default_optional": true
+		},
+		{
+			"name": "condition",
+			"role": "input",
+			"type": "occultism_kubejs:condition",
+			"default_optional": true,
+			"alternative_names": [
+				"startCondition"
+			]
+		}
+	],
+	"unique": [
+		"ritual_dummy"
+	]
+}
