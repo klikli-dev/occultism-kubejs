@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [release/v1.21.1-1.10.0] - 2025-11-01
+### :sparkles: New Features
+- [`e7b79f9`](https://github.com/klikli-dev/occultism-kubejs/commit/e7b79f9203d2ce32f937daed95867d78f4685cb3) - Migrate to JSON schemas, fix ritual schema *(PR [#15](https://github.com/klikli-dev/occultism-kubejs/pull/15) by [@MaxNeedsSnacks](https://github.com/MaxNeedsSnacks))*
+  - :arrow_lower_right: *addresses issue [#14](https://github.com/klikli-dev/occultism-kubejs/issues/14) opened by [@brisingraerowing](https://github.com/brisingraerowing)*
+
+
 ## [release/v1.21.1-1.9.1] - 2025-10-20
 ### :wrench: Chores
 - [`9093eb5`](https://github.com/klikli-dev/occultism-kubejs/commit/9093eb5e7e98211b7097bb71159cc1abf0b4e479) - update to latest kubejs and recompile *(commit by [@klikli-dev](https://github.com/klikli-dev))*
@@ -110,3 +116,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [release/v1.21.1-1.8.0]: https://github.com/klikli-dev/occultism-kubejs/compare/release/v1.21.1-1.7.0...release/v1.21.1-1.8.0
 [release/v1.21.1-1.9.0]: https://github.com/klikli-dev/occultism-kubejs/compare/release/v1.21.1-1.8.0...release/v1.21.1-1.9.0
 [release/v1.21.1-1.9.1]: https://github.com/klikli-dev/occultism-kubejs/compare/release/v1.21.1-1.9.0...release/v1.21.1-1.9.1
+[release/v1.21.1-1.10.0]: https://github.com/klikli-dev/occultism-kubejs/compare/release/v1.21.1-1.9.1...release/v1.21.1-1.10.0
