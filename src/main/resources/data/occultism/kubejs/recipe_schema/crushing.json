@@ -1,0 +1,38 @@
+{
+	"keys": [
+		{
+			"name": "result",
+			"role": "output",
+			"type": "occultism_kubejs:recipe_result"
+		},
+		{
+			"name": "ingredient",
+			"role": "input",
+			"type": "ingredient"
+		},
+		{
+			"name": "crushing_time",
+			"type": "ticks",
+			"optional": 200
+		},
+		{
+			"name": "min_tier",
+			"type": {
+				"type": "int"
+			},
+			"optional": -1
+		},
+		{
+			"name": "max_tier",
+			"type": {
+				"type": "int"
+			},
+			"optional": -1
+		},
+		{
+			"name": "ignore_crushing_multiplier",
+			"type": "boolean",
+			"optional": false
+		}
+	]
+}

@@ -3,13 +3,15 @@
 		{
 			"name": "result",
 			"role": "output",
-			"type": "item_stack",
-			"allow_empty": true
+			"type": "optional_item_stack"
 		},
 		{
 			"name": "ingredients",
 			"role": "input",
-			"type": "ingredient[]"
+			"type": {
+				"component": "ingredient",
+				"type": "list"
+			}
 		},
 		{
 			"name": "activation_item",
@@ -37,7 +39,9 @@
 		{
 			"name": "spirit_max_age",
 			"role": "input",
-			"type": "int",
+			"type": {
+				"type": "int"
+			},
 			"optional": -1,
 			"alternative_names": [
 				"spiritMaxAge",
@@ -48,7 +52,7 @@
 			"name": "spirit_job_type",
 			"role": "input",
 			"type": "id",
-			"optional": null,
+			"default_optional": true,
 			"alternative_names": [
 				"spiritJobType",
 				"jobType"
@@ -83,7 +87,7 @@
 			"name": "entity_to_summon",
 			"role": "input",
 			"type": "id",
-			"optional": null,
+			"default_optional": true,
 			"alternative_names": [
 				"entityToSummon",
 				"summon"
@@ -93,7 +97,7 @@
 			"name": "entity_tag_to_summon",
 			"role": "input",
 			"type": "entity_type_tag",
-			"optional": null,
+			"default_optional": true,
 			"alternative_names": [
 				"entityTagToSummon",
 				"summonTag"
@@ -103,7 +107,7 @@
 			"name": "entity_nbt",
 			"role": "input",
 			"type": "string",
-			"optional": null,
+			"default_optional": true,
 			"alternative_names": [
 				"entityNbt"
 			]
@@ -111,8 +115,8 @@
 		{
 			"name": "entity_to_sacrifice",
 			"role": "input",
-			"type": "occultism:entity_to_sacrifice",
-			"optional": null,
+			"type": "occultism_kubejs:entity_to_sacrifice",
+			"default_optional": true,
 			"alternative_names": [
 				"entityToSacrifice",
 				"sacrifice"
@@ -121,25 +125,24 @@
 		{
 			"name": "item_to_use",
 			"role": "input",
-			"type": "ingredient",
+			"type": "optional_ingredient",
 			"optional": [],
 			"alternative_names": [
 				"itemToUse",
 				"useItem"
-			],
-			"allow_empty": true
+			]
 		},
 		{
 			"name": "command",
 			"role": "input",
 			"type": "string",
-			"optional": null
+			"default_optional": true
 		},
 		{
 			"name": "condition",
 			"role": "input",
-			"type": "occultism:condition",
-			"optional": null,
+			"type": "occultism_kubejs:condition",
+			"default_optional": true,
 			"alternative_names": [
 				"startCondition"
 			]
