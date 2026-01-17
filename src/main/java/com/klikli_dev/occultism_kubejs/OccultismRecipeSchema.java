@@ -25,8 +25,11 @@ public interface OccultismRecipeSchema {
     RecipeKey<Integer> MAX_TIER = NumberComponent.INT.key("max_tier", ComponentRole.OTHER).optional(-1);
     RecipeKey<Boolean> IGNORE_CRUSHING_MULTIPLIER = BooleanComponent.BOOLEAN.key("ignore_crushing_multiplier", ComponentRole.OTHER).optional(false);
 
+    RecipeKey<String> TRADER_ID = StringComponent.STRING.key("trader_id", ComponentRole.OTHER);
+
+
     RecipeSchema SPIRIT_FIRE = new RecipeSchema(ITEM_STACK_RESULT, INGREDIENT);
-    RecipeSchema SPIRIT_TRADE = new RecipeSchema(ITEM_STACK_RESULT, INGREDIENT);
+    RecipeSchema SPIRIT_TRADE = new RecipeSchema(WEIGHTED_RECIPE_RESULT, TRADER_ID, INGREDIENT);
     RecipeSchema CRUSHING = new RecipeSchema(RECIPE_RESULT, INGREDIENT, CRUSHING_TIME, MIN_TIER, MAX_TIER, IGNORE_CRUSHING_MULTIPLIER);
 
     RecipeSchema MINER = new RecipeSchema(WEIGHTED_RECIPE_RESULT, INGREDIENT);

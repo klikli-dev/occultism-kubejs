@@ -7,7 +7,14 @@ console.info('Hello, World! (Loaded server scripts)')
 ServerEvents.recipes((event) => {
     //Some examples of how to add recipes:
 
-    // event.recipes.occultism.spirit_trade('minecraft:rotten_flesh', 'minecraft:bone') //Note that a trade recipe alone is not enough, it needs a corresponding spirit job that is set to perform this trade.
+    event.recipes.occultism.spirit_trade(
+        WeightedRecipeResult.of('minecraft:wooden_pickaxe',
+            1, //count
+            100 //weight
+        ), //the trade output
+        'minecraft:emerald_ore', //the trade input
+        'occultism:trader_otherrock' //the id of the trader spirit
+    )
     event.recipes.occultism.spirit_fire('minecraft:emerald_ore', '#c:gems/emerald')
     event.recipes.occultism.crushing(
         RecipeResult.of("#c:ores/iron", 2),
@@ -15,7 +22,10 @@ ServerEvents.recipes((event) => {
     )
     event.recipes.occultism.miner(
         //item, count, weight
-        WeightedRecipeResult.of('minecraft:wooden_pickaxe', 1, 100),
+        WeightedRecipeResult.of('minecraft:wooden_pickaxe',
+            1, //count
+            100 //weight
+        ),
         '#occultism:miners/master'
     )
 

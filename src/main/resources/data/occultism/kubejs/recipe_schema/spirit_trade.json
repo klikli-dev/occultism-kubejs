@@ -3,12 +3,16 @@
 		{
 			"name": "result",
 			"role": "output",
-			"type": "item_stack"
+			"type": "occultism_kubejs:weighted_recipe_result"
 		},
 		{
 			"name": "ingredient",
 			"role": "input",
 			"type": "ingredient"
+		},
+		{
+			"name": "trader_id",
+			"type": "string"
 		}
 	]
 }

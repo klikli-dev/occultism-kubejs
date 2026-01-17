@@ -62,7 +62,7 @@ repositories {
 			includeGroup "mezz.jei"
 		}
 	}
-	maven {
+	maven { //used to be curios
 		name = "Curios Maven"
 		url = "https://maven.theillusivec4.top/"
 		content {
@@ -142,6 +142,8 @@ dependencies {
 	implementation "com.klikli_dev:occultism-${minecraft_version}-neoforge:${occultism_version}"
 
 	implementation "dev.latvian.mods:kubejs-neoforge:${kubejs_version}"
+
+	localRuntime ("top.theillusivec4.curios:curios-neoforge:${curios_version}+${minecraft_version}") {transitive=false}
 
 	localRuntime ("dev.emi:emi-neoforge:${emi_version}") {transitive=false}
 }
