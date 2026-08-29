@@ -23,7 +23,7 @@
 package com.klikli_dev.occultism_kubejs;
 
 import com.klikli_dev.occultism.handlers.TooltipHandler;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
@@ -40,13 +40,13 @@ public class OccultismKubeJS {
     public OccultismKubeJS(IEventBus modEventBus, ModContainer modContainer) {
         INSTANCE = this;
 
-        if (FMLEnvironment.dist == Dist.CLIENT) {
+        if (FMLEnvironment.getDist() == Dist.CLIENT) {
             modEventBus.addListener(OccultismKubeJS.Client::onClientSetup);
         }
     }
 
-    public static ResourceLocation loc(String path) {
-        return ResourceLocation.fromNamespaceAndPath(MODID, path);
+    public static Identifier loc(String path) {
+        return Identifier.fromNamespaceAndPath(MODID, path);
     }
 
     public static class Client {

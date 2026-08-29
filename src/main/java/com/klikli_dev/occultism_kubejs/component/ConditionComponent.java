@@ -8,15 +8,16 @@ import dev.latvian.mods.kubejs.recipe.RecipeScriptContext;
 import dev.latvian.mods.kubejs.recipe.component.RecipeComponent;
 import dev.latvian.mods.kubejs.recipe.component.RecipeComponentType;
 import dev.latvian.mods.rhino.type.TypeInfo;
+import net.minecraft.resources.ResourceKey;
 import net.neoforged.neoforge.common.conditions.ICondition;
 
 public record ConditionComponent(Codec<ICondition> codec) implements RecipeComponent<ICondition> {
-    public static final RecipeComponentType<ICondition> CONDITION = RecipeComponentType.unit(OccultismKubeJS.loc("condition"), new ConditionComponent(ICondition.CODEC));
+    public static final ResourceKey<RecipeComponentType<?>> CONDITION = RecipeComponentType.key(OccultismKubeJS.loc("condition"));
 
-    public static final TypeInfo TYPE_INFO = TypeInfo.of(ConditionComponent.class);
+    public static final TypeInfo TYPE_INFO = TypeInfo.of(ICondition.class);
 
     @Override
-    public RecipeComponentType<?> type() {
+    public ResourceKey<RecipeComponentType<?>> type() {
         return CONDITION;
     }
 

@@ -9,15 +9,16 @@ import dev.latvian.mods.kubejs.recipe.RecipeScriptContext;
 import dev.latvian.mods.kubejs.recipe.component.RecipeComponent;
 import dev.latvian.mods.kubejs.recipe.component.RecipeComponentType;
 import dev.latvian.mods.rhino.type.TypeInfo;
+import net.minecraft.resources.ResourceKey;
 
 public record WeightedRecipeResultComponent(
         Codec<WeightedRecipeResult> codec) implements RecipeComponent<WeightedRecipeResult> {
-    public static final RecipeComponentType<WeightedRecipeResult> WEIGHTED_RECIPE_RESULT = RecipeComponentType.unit(OccultismKubeJS.loc("weighted_recipe_result"), new WeightedRecipeResultComponent(WeightedRecipeResult.CODEC));
+    public static final ResourceKey<RecipeComponentType<?>> WEIGHTED_RECIPE_RESULT = RecipeComponentType.key(OccultismKubeJS.loc("weighted_recipe_result"));
 
-    public static final TypeInfo TYPE_INFO = TypeInfo.of(WeightedRecipeResultComponent.class);
+    public static final TypeInfo TYPE_INFO = TypeInfo.of(WeightedRecipeResult.class);
 
     @Override
-    public RecipeComponentType<?> type() {
+    public ResourceKey<RecipeComponentType<?>> type() {
         return WEIGHTED_RECIPE_RESULT;
     }
 

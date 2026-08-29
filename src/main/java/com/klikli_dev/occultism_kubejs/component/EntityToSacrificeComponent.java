@@ -9,15 +9,16 @@ import dev.latvian.mods.kubejs.recipe.RecipeScriptContext;
 import dev.latvian.mods.kubejs.recipe.component.RecipeComponent;
 import dev.latvian.mods.kubejs.recipe.component.RecipeComponentType;
 import dev.latvian.mods.rhino.type.TypeInfo;
+import net.minecraft.resources.ResourceKey;
 
 public record EntityToSacrificeComponent(
         Codec<RitualRecipe.EntityToSacrifice> codec) implements RecipeComponent<RitualRecipe.EntityToSacrifice> {
-    public static final RecipeComponentType<RitualRecipe.EntityToSacrifice> ENTITY_TO_SACRIFICE = RecipeComponentType.unit(OccultismKubeJS.loc("entity_to_sacrifice"), new EntityToSacrificeComponent(RitualRecipe.EntityToSacrifice.CODEC.codec()));
+    public static final ResourceKey<RecipeComponentType<?>> ENTITY_TO_SACRIFICE = RecipeComponentType.key(OccultismKubeJS.loc("entity_to_sacrifice"));
 
-    public static final TypeInfo TYPE_INFO = TypeInfo.of(EntityToSacrificeComponent.class);
+    public static final TypeInfo TYPE_INFO = TypeInfo.of(RitualRecipe.EntityToSacrifice.class);
 
     @Override
-    public RecipeComponentType<?> type() {
+    public ResourceKey<RecipeComponentType<?>> type() {
         return ENTITY_TO_SACRIFICE;
     }
 

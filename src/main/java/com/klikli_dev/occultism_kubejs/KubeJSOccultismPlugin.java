@@ -63,10 +63,10 @@ public class KubeJSOccultismPlugin implements KubeJSPlugin {
 
     @Override
     public void registerRecipeComponents(RecipeComponentTypeRegistry registry) {
-        registry.register(RecipeResultComponent.RECIPE_RESULT);
-        registry.register(WeightedRecipeResultComponent.WEIGHTED_RECIPE_RESULT);
-        registry.register(EntityToSacrificeComponent.ENTITY_TO_SACRIFICE);
-        registry.register(ConditionComponent.CONDITION);
+        registry.unit(new RecipeResultComponent(RecipeResult.CODEC));
+        registry.unit(new WeightedRecipeResultComponent(WeightedRecipeResult.CODEC));
+        registry.unit(new EntityToSacrificeComponent(com.klikli_dev.occultism.crafting.recipe.RitualRecipe.EntityToSacrifice.CODEC.codec()));
+        registry.unit(new ConditionComponent(net.neoforged.neoforge.common.conditions.ICondition.CODEC));
     }
 
     @Override

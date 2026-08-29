@@ -28,14 +28,14 @@ import dev.latvian.mods.kubejs.generator.KubeAssetGenerator;
 import dev.latvian.mods.kubejs.item.ItemBuilder;
 import dev.latvian.mods.kubejs.typings.Info;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
 
 
 public class RitualDummyItemType extends ItemBuilder {
     public Component ritualTooltip;
 
-    public RitualDummyItemType(ResourceLocation rl) {
+    public RitualDummyItemType(Identifier rl) {
         super(rl);
 
         this.ritualTooltip = Component.empty();
@@ -43,7 +43,7 @@ public class RitualDummyItemType extends ItemBuilder {
         //make the item just use the ritual dummy parent mode
         //Note:  we are not using this.parentModel() because it causes textures to be overwritten with a texture location corresponding to the item id unless the correct one is manually specified again
         //Note: We now use parentModel because this.itemModel is gone, instead we fix the texture issue in generateAssets
-        this.parentModel(ResourceLocation.parse("occultism:item/pentacle_misc"));
+        this.parentModel(Identifier.parse("occultism:item/pentacle_misc"));
     }
 
     @Override
@@ -78,7 +78,7 @@ public class RitualDummyItemType extends ItemBuilder {
             Valid options are: "misc", "craft", "summon", "possess".
             """)
     public RitualDummyItemType pentacleType(String pentacleType) {
-        this.parentModel(ResourceLocation.parse("occultism:item/pentacle_" + pentacleType));
+        this.parentModel(Identifier.parse("occultism:item/pentacle_" + pentacleType));
         return this;
     }
 

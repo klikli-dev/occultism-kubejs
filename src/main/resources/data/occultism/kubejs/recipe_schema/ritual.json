@@ -126,7 +126,7 @@
 			"name": "item_to_use",
 			"role": "input",
 			"type": "optional_ingredient",
-			"optional": [],
+			"default_optional": true,
 			"alternative_names": [
 				"itemToUse",
 				"useItem"

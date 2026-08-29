@@ -26,7 +26,7 @@ ServerEvents.recipes((event) => {
             1, //count
             100 //weight
         ),
-        '#occultism:miners/master'
+        '#occultism:miners/eldritch'
     )
 
     event.recipes.occultism.ritual(

@@ -13,9 +13,11 @@ import net.minecraft.world.item.crafting.Ingredient;
 
 public interface OccultismRecipeSchema {
 
+    RecipeResultComponent RECIPE_RESULT_COMPONENT = new RecipeResultComponent(RecipeResult.CODEC);
+    WeightedRecipeResultComponent WEIGHTED_RECIPE_RESULT_COMPONENT = new WeightedRecipeResultComponent(WeightedRecipeResult.CODEC);
 
-    RecipeKey<RecipeResult> RECIPE_RESULT = RecipeResultComponent.RECIPE_RESULT.outputKey("result");
-    RecipeKey<WeightedRecipeResult> WEIGHTED_RECIPE_RESULT = WeightedRecipeResultComponent.WEIGHTED_RECIPE_RESULT.outputKey("result");
+    RecipeKey<RecipeResult> RECIPE_RESULT = RECIPE_RESULT_COMPONENT.outputKey("result");
+    RecipeKey<WeightedRecipeResult> WEIGHTED_RECIPE_RESULT = WEIGHTED_RECIPE_RESULT_COMPONENT.outputKey("result");
     RecipeKey<ItemStack> ITEM_STACK_RESULT = ItemStackComponent.ITEM_STACK.outputKey("result");
 
     RecipeKey<Ingredient> INGREDIENT = IngredientComponent.INGREDIENT.inputKey("ingredient");

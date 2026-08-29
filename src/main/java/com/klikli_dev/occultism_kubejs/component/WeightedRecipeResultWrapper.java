@@ -10,14 +10,12 @@ import dev.latvian.mods.kubejs.typings.Info;
 import dev.latvian.mods.kubejs.util.RegistryAccessContainer;
 import dev.latvian.mods.rhino.Context;
 import dev.latvian.mods.rhino.Wrapper;
-import net.minecraft.core.component.DataComponentPredicate;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.core.component.DataComponentMap;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.crafting.Ingredient;
 import org.jetbrains.annotations.Nullable;
 
 @Info("Various recipe result related helper methods")
@@ -42,86 +40,42 @@ public interface WeightedRecipeResultWrapper {
             o = w.unwrap();
         }
 
-        if (o == null || o == ItemStack.EMPTY || o == Items.AIR || o == Ingredient.EMPTY) {
+        if (o == null || o == ItemStack.EMPTY || o == Items.AIR) {
             return WeightedRecipeResult.of(ItemStack.EMPTY, 1);
         } else if (o instanceof TagKey<?> tag) {
             return WeightedRecipeResult.of(ItemTags.create(tag.location()), 1);
         }
-//        else if (o instanceof JsonElement json) {
-//            return ofJson(registries, json);
-//        }
         else if (o instanceof CharSequence) {
             return ofString(cx, o.toString());
         }
 
-
         return WeightedRecipeResult.of(ItemWrapper.wrap(cx, o), 1);
     }
 
-    static WeightedRecipeResult ofString(Context registries, String s) {
+    static WeightedRecipeResult ofString(Context cx, String s) {
         if (s.isEmpty() || s.equals("-") || s.equals("air") || s.equals("minecraft:air")) {
             return WeightedRecipeResult.of(ItemStack.EMPTY, 1);
         } else if (s.equals("*")) {
             throw new UnsupportedOperationException("Wildcard recipe results are not supported");
-        } else {
-            try {
-                return read(registries, new StringReader(s));
-            } catch (CommandSyntaxException e) {
-                KubeJS.LOGGER.error("Failed to read recipe result from '" + s + "': " + e);
-                return WeightedRecipeResult.of(ItemStack.EMPTY, 1);
-            }
-        }
-    }
-
-    static WeightedRecipeResult read(Context cx, StringReader reader) throws CommandSyntaxException {
-        if (!reader.canRead()) {
-            return WeightedRecipeResult.of(ItemStack.EMPTY, 1);
         }
 
-        return switch (reader.peek()) {
-            case '-' -> {
-                reader.skip();
-                yield WeightedRecipeResult.of(ItemStack.EMPTY, 1);
-            }
-            case '*' -> {
-                reader.skip();
-                throw new UnsupportedOperationException("Wildcard recipe results are not supported");
-            }
-            case '#' -> {
-                reader.skip();
-                yield WeightedRecipeResult.of(ItemTags.create(ResourceLocation.read(reader)), 1);
-            }
-            case '@' -> {
-                reader.skip();
-                throw new UnsupportedOperationException("Namespaced recipe results are not supported");
-            }
-            case '%' -> {
-                reader.skip();
-                throw new UnsupportedOperationException("Creative tab recipe results are not supported");
-            }
-            case '/' -> {
-                throw new UnsupportedOperationException("Regex recipe results are not supported");
-            }
-            case '[' -> {
-                throw new UnsupportedOperationException("Compound recipe results are not supported");
-            }
-            default -> {
-                var itemId = ResourceLocation.read(reader);
-                var item = BuiltInRegistries.ITEM.get(itemId);
+        if (s.startsWith("#")) {
+            var tag = s.substring(1);
+            return WeightedRecipeResult.of(ItemTags.create(Identifier.parse(tag)), 1);
+        }
 
-                var next = reader.canRead() ? reader.peek() : 0;
-
-                if (next == '[' || next == '{') {
-                    var components = DataComponentWrapper.readPredicate(RegistryAccessContainer.of(cx).nbt(), reader);
-
-                    if (components != DataComponentPredicate.EMPTY) {
-                        //noinspection deprecation
-                        yield WeightedRecipeResult.of(new ItemStack(item.builtInRegistryHolder(), 1, components.asPatch()), 1);
-                    }
-                }
-
-                yield WeightedRecipeResult.of(new ItemStack(item), 1);
+        try {
+            var stack = ItemWrapper.wrap(cx, s);
+            if (stack.isEmpty()) {
+                KubeJS.LOGGER.error("Unknown item: '" + s + "'");
+                throw new IllegalArgumentException("Unknown item: '" + s + "'");
             }
-        };
+            return WeightedRecipeResult.of(stack, 1);
+        } catch (IllegalArgumentException e) {
+            throw e;
+        } catch (Exception e) {
+            KubeJS.LOGGER.error("Failed to read recipe result from '" + s + "': " + e);
+            throw new IllegalArgumentException("Failed to read recipe result from '" + s + "': " + e.getMessage());
+        }
     }
 }

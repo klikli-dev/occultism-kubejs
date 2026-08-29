@@ -1,23 +1,16 @@
 package com.klikli_dev.occultism_kubejs.component;
 
 import com.klikli_dev.occultism.crafting.recipe.result.RecipeResult;
-import com.mojang.brigadier.StringReader;
-import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import dev.latvian.mods.kubejs.KubeJS;
-import dev.latvian.mods.kubejs.component.DataComponentWrapper;
 import dev.latvian.mods.kubejs.plugin.builtin.wrapper.ItemWrapper;
 import dev.latvian.mods.kubejs.typings.Info;
-import dev.latvian.mods.kubejs.util.RegistryAccessContainer;
 import dev.latvian.mods.rhino.Context;
 import dev.latvian.mods.rhino.Wrapper;
-import net.minecraft.core.component.DataComponentPredicate;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.crafting.Ingredient;
 import org.jetbrains.annotations.Nullable;
 
 @Info("Various recipe result related helper methods")
@@ -38,86 +31,42 @@ public interface RecipeResultWrapper {
             o = w.unwrap();
         }
 
-        if (o == null || o == ItemStack.EMPTY || o == Items.AIR || o == Ingredient.EMPTY) {
+        if (o == null || o == ItemStack.EMPTY || o == Items.AIR) {
             return RecipeResult.of(ItemStack.EMPTY);
         } else if (o instanceof TagKey<?> tag) {
             return RecipeResult.of(ItemTags.create(tag.location()));
         }
-//        else if (o instanceof JsonElement json) {
-//            return ofJson(registries, json);
-//        }
         else if (o instanceof CharSequence) {
             return ofString(cx, o.toString());
         }
 
-
         return RecipeResult.of(ItemWrapper.wrap(cx, o));
     }
 
-    static RecipeResult ofString(Context registries, String s) {
+    static RecipeResult ofString(Context cx, String s) {
         if (s.isEmpty() || s.equals("-") || s.equals("air") || s.equals("minecraft:air")) {
             return RecipeResult.of(ItemStack.EMPTY);
         } else if (s.equals("*")) {
             throw new UnsupportedOperationException("Wildcard recipe results are not supported");
-        } else {
-            try {
-                return read(registries, new StringReader(s));
-            } catch (CommandSyntaxException e) {
-                KubeJS.LOGGER.error("Failed to read recipe result from '" + s + "': " + e);
-                return RecipeResult.of(ItemStack.EMPTY);
-            }
-        }
-    }
-
-    static RecipeResult read(Context cx, StringReader reader) throws CommandSyntaxException {
-        if (!reader.canRead()) {
-            return RecipeResult.of(ItemStack.EMPTY);
         }
 
-        return switch (reader.peek()) {
-            case '-' -> {
-                reader.skip();
-                yield RecipeResult.of(ItemStack.EMPTY);
-            }
-            case '*' -> {
-                reader.skip();
-                throw new UnsupportedOperationException("Wildcard recipe results are not supported");
-            }
-            case '#' -> {
-                reader.skip();
-                yield RecipeResult.of(ItemTags.create(ResourceLocation.read(reader)));
-            }
-            case '@' -> {
-                reader.skip();
-                throw new UnsupportedOperationException("Namespaced recipe results are not supported");
-            }
-            case '%' -> {
-                reader.skip();
-                throw new UnsupportedOperationException("Creative tab recipe results are not supported");
-            }
-            case '/' -> {
-                throw new UnsupportedOperationException("Regex recipe results are not supported");
-            }
-            case '[' -> {
-                throw new UnsupportedOperationException("Compound recipe results are not supported");
-            }
-            default -> {
-                var itemId = ResourceLocation.read(reader);
-                var item = BuiltInRegistries.ITEM.get(itemId);
+        if (s.startsWith("#")) {
+            var tag = s.substring(1);
+            return RecipeResult.of(ItemTags.create(Identifier.parse(tag)));
+        }
 
-                var next = reader.canRead() ? reader.peek() : 0;
-
-                if (next == '[' || next == '{') {
-                    var components = DataComponentWrapper.readPredicate(RegistryAccessContainer.of(cx).nbt(), reader);
-
-                    if (components != DataComponentPredicate.EMPTY) {
-                        //noinspection deprecation
-                        yield RecipeResult.of(new ItemStack(item.builtInRegistryHolder(), 1, components.asPatch()));
-                    }
-                }
-
-                yield RecipeResult.of(new ItemStack(item));
+        try {
+            var stack = ItemWrapper.wrap(cx, s);
+            if (stack.isEmpty()) {
+                KubeJS.LOGGER.error("Unknown item: '" + s + "'");
+                throw new IllegalArgumentException("Unknown item: '" + s + "'");
             }
-        };
+            return RecipeResult.of(stack);
+        } catch (IllegalArgumentException e) {
+            throw e;
+        } catch (Exception e) {
+            KubeJS.LOGGER.error("Failed to read recipe result from '" + s + "': " + e);
+            throw new IllegalArgumentException("Failed to read recipe result from '" + s + "': " + e.getMessage());
+        }
     }
 }
