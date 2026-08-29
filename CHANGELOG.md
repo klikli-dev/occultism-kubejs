@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [release/v26.1.2-1.11.0] - 2026-08-29
+### :sparkles: New Features
+- [`dce06d1`](https://github.com/klikli-dev/occultism-kubejs/commit/dce06d197cfbe5d9dedd101c2228042592fdc4c8) - update to 26.1.2 *(commit by [@klikli-dev](https://github.com/klikli-dev))*
+
+### :bug: Bug Fixes
+- [`b25226b`](https://github.com/klikli-dev/occultism-kubejs/commit/b25226b2db372515bfb91ec4e62e8f7db074da0b) - use of incorrect action token *(commit by [@klikli-dev](https://github.com/klikli-dev))*
+
+
 ## [release/v1.21.1-1.11.0] - 2026-01-17
 ### :sparkles: New Features
 - [`75aaeb7`](https://github.com/klikli-dev/occultism-kubejs/commit/75aaeb7bcbf2623961644b43ca4fc5dfbe7e90f5) - update to new spirit trader recipe format *(commit by [@klikli-dev](https://github.com/klikli-dev))*
@@ -123,3 +131,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [release/v1.21.1-1.9.1]: https://github.com/klikli-dev/occultism-kubejs/compare/release/v1.21.1-1.9.0...release/v1.21.1-1.9.1
 [release/v1.21.1-1.10.0]: https://github.com/klikli-dev/occultism-kubejs/compare/release/v1.21.1-1.9.1...release/v1.21.1-1.10.0
 [release/v1.21.1-1.11.0]: https://github.com/klikli-dev/occultism-kubejs/compare/release/v1.21.1-1.10.0...release/v1.21.1-1.11.0
+[release/v26.1.2-1.11.0]: https://github.com/klikli-dev/occultism-kubejs/compare/release/v26.1.2-0.0.0...release/v26.1.2-1.11.0
