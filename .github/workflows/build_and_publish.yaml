@@ -26,7 +26,7 @@ jobs:
         id: get_release_type
         uses: actions/github-script@v7
         with:
-          github-token: ${{ secrets.RELEASE_NOTES_TOKEN }}
+          github-token: ${{ github.token }}
           result-encoding: string
           script: |
             return '${{ github.ref }}'.match(/refs\/tags\/(.*)\/v((.*)-(.*))/)[1];
@@ -34,7 +34,7 @@ jobs:
         id: get_version
         uses: actions/github-script@v7
         with:
-          github-token: ${{ secrets.RELEASE_NOTES_TOKEN }}
+          github-token: ${{ github.token }}
           result-encoding: string
           script: |
             return '${{ github.ref }}'.match(/refs\/tags\/(.*)\/v((.*)-(.*))/)[4];
@@ -42,7 +42,7 @@ jobs:
         id: get_mc_version
         uses: actions/github-script@v7
         with:
-          github-token: ${{ secrets.RELEASE_NOTES_TOKEN }}
+          github-token: ${{ github.token }}
           result-encoding: string
           script: |
             return '${{ github.ref }}'.match(/refs\/tags\/(.*)\/v((.*)-(.*))/)[3];
